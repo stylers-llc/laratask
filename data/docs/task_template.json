@@ -1,0 +1,58 @@
+{
+  "id": 1,
+  "name": {
+    "en": "HR KPI fill",
+    "hu": "HR KPI kitöltése"
+  },
+  "description": {
+    "en": "Lorem ipsum",
+    "hu": "Lorem ipsum dolor"
+  },
+  "taskable": {
+    "id": 1,
+    "type": "KeyPerformanceIndicator"
+  },
+  "delegatable": {
+    "id": 1,
+    "type": "User"
+  },
+  "assignable": {
+    "id": 2,
+    "type": "User"
+  },
+  "task_runtimes": [
+    {
+      "id": 1,
+      "name": {
+        "en": "monthly",
+        "hu": "havi"
+      },
+      "start_at": "2018-02-26 14:38:00",
+      "end_at": null,
+      "exclude_start_date": false,
+      "date_interval": "P1M"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "status": "success",
+      "deadline_at": "2018-02-26 14:38:00",
+      "executed_at": "2018-02-26 14:38:00",
+      "executable": {
+        "id": 2,
+        "type": "User"
+      }
+    },
+    {
+      "id": 2,
+      "status": "created",
+      "deadline_at": "2018-03-26 14:38:00",
+      "executed_at": null,
+      "executable": {
+        "id": null,
+        "type": null
+      }
+    }
+  ]
+}
