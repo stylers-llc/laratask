@@ -19,6 +19,14 @@
     "orchestra/testbench": "^3.4",
     "phpmd/phpmd": "^2.6"
   },
+  "autoload": {
+    "classmap": [
+      "src/database"
+    ],
+    "psr-4": {
+      "Stylers\\Laratask\\": "src"
+    }
+  },
   "autoload-dev": {
     "psr-4": {
       "Stylers\\Laratask\\Tests\\": "tests"
