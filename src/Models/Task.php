@@ -4,6 +4,7 @@ namespace Stylers\Laratask\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Stylers\Taxonomy\Models\Taxonomy;
 
 /**
  * Class Task
@@ -20,6 +21,8 @@ class Task extends Model
     protected $fillable = [
         'deadline_at',
         'executed_at',
+        'status_tx_id',
+        'task_template_id'
     ];
     /**
      * Attribute Casting
@@ -38,5 +41,10 @@ class Task extends Model
     public function executable()
     {
         return $this->morphTo();
+    }
+
+    public function status()
+    {
+        return $this->hasOne(Taxonomy::class, 'id', 'status_tx_id');
     }
 }

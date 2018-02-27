@@ -7,4 +7,6 @@ interface DelegatableInterface
     public function delegatedTaskTemplates();
 
     public function delegatedTasks();
+
+    public function getName();
 }

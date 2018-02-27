@@ -14,11 +14,13 @@
   },
   "delegatable": {
     "id": 1,
-    "type": "User"
+    "type": "User",
+    "name": "John Doe"
   },
   "assignable": {
     "id": 2,
-    "type": "User"
+    "type": "User",
+    "name": "Jane Doe"
   },
   "task_runtimes": [
     {

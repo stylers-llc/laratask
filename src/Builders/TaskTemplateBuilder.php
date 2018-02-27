@@ -57,6 +57,8 @@ class TaskTemplateBuilder implements TaskTemplateBuilderInterface
 
     public function build()
     {
+//        $this->validator->validate();
+
         DB::transaction(function () {
             $this->storeName();
             $this->storeDescription();
@@ -81,7 +83,7 @@ class TaskTemplateBuilder implements TaskTemplateBuilderInterface
     private function storeDescription()
     {
         $setter = new DescriptionSetter(
-            $this->descriptionArray['translations'],
+            $this->descriptionArray,
             $this->taskTemplate->description_id
         );
         $description = $setter->set();

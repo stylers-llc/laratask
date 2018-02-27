@@ -7,4 +7,6 @@ interface AssignableInterface
     public function assignedTaskTemplates();
 
     public function assignedTasks();
+
+    public function getName();
 }

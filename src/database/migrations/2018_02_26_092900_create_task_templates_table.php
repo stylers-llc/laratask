@@ -19,8 +19,8 @@ class CreateTaskTemplatesTable extends Migration
             $table->integer('name_tx_id')->unsigned();
             $table->integer('description_id')->unsigned()->nullable();
 
-            $table->integer('taskable_id');
-            $table->string('taskable_type'); // CalendarEvent, KPI etc.
+            $table->integer('taskable_id')->nullable();
+            $table->string('taskable_type')->nullable(); // CalendarEvent, KPI etc.
 
             // delegated by
             $table->integer('delegatable_id')->nullable();
