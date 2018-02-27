@@ -17,7 +17,7 @@ class CreateTasksTable extends Migration
             $table->increments('id');
 
             $table->integer('task_template_id')->unsigned();
-            $table->integer('status_tx_id');
+            $table->integer('status_tx_id')->unsigned();
 
             $table->integer('executable_id')->nullable();
             $table->string('executable_type')->nullable(); // User, Group etc.
@@ -28,8 +28,8 @@ class CreateTasksTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('task_template_id')->references('id')->on('task_templates');
             $table->foreign('status_tx_id')->references('id')->on('taxonomies');
-            $table->foreign('task_executor_id')->references('id')->on('task_executor');
         });
     }
 
