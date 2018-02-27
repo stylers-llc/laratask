@@ -16,6 +16,10 @@ class LarataskTaxonomiesTableSeeder extends Seeder
      */
     public function run()
     {
+        $kpiNames = Taxonomy::loadTaxonomy(config('laratask.taxonomy.task_template_names'));
+        $kpiNames->name = 'task_template_names';
+        $kpiNames->save();
+
         $taxonomies = [
             'laratask.taxonomy.task_status' => 'laratask.taxonomy.task_statuses',
         ];

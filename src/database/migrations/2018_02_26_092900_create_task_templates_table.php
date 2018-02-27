@@ -23,8 +23,8 @@ class CreateTaskTemplatesTable extends Migration
             $table->string('taskable_type'); // CalendarEvent, KPI etc.
 
             // delegated by
-            $table->integer('delegatable_id');
-            $table->string('delegatable_type'); // User, Group, Android etc.
+            $table->integer('delegatable_id')->nullable();
+            $table->string('delegatable_type')->nullable(); // User, Group, Android etc.
 
             // delegated to
             $table->integer('assignable_id');

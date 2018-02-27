@@ -16,7 +16,8 @@ class TaskTemplate extends Model
      * @var array
      */
     protected $fillable = [
-
+        'name_tx_id',
+        'description_id'
     ];
 
     public function name()
@@ -52,10 +53,5 @@ class TaskTemplate extends Model
     public function taskable()
     {
         return $this->morphTo();
-    }
-
-    public function buildTask()
-    {
-
     }
 }

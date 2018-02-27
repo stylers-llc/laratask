@@ -9,6 +9,12 @@
     }
   ],
   "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/stylers-llc/taxonomy"
+    }
+  ],
   "require": {
     "php": ">=7.0",
     "laravel/framework": "5.*",
@@ -29,7 +35,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Stylers\\Laratask\\Tests\\": "tests"
+      "Stylers\\Laratask\\Tests\\": "tests",
+      "Stylers\\Laratask\\Tests\\Fixtures\\": "tests/fixtures"
     }
   },
   "extra": {
