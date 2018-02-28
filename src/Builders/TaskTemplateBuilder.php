@@ -57,11 +57,9 @@ class TaskTemplateBuilder implements TaskTemplateBuilderInterface
 
     public function build()
     {
-//        $this->validator->validate();
-
         DB::transaction(function () {
             $this->storeName();
-            $this->storeDescription();
+            if ($this->descriptionArray) $this->storeDescription();
             $this->taskTemplate->save();
         });
     }

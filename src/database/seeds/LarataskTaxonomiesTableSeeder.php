@@ -1,6 +1,6 @@
 <?php
 
-namespace Stylers\Laratask\Datatabase\Seeds;
+namespace Stylers\Laratask\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 use Stylers\Taxonomy\Models\Language;
