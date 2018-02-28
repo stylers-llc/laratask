@@ -11,6 +11,10 @@ use Stylers\Laratask\Models\TaskTemplate;
 use Stylers\Taxonomy\Manipulators\DescriptionSetter;
 use Stylers\Taxonomy\Manipulators\TaxonomySetter;
 
+/**
+ * Class TaskTemplateBuilder
+ * @package Stylers\Laratask\Builders
+ */
 class TaskTemplateBuilder implements TaskTemplateBuilderInterface
 {
     /**
@@ -29,32 +33,51 @@ class TaskTemplateBuilder implements TaskTemplateBuilderInterface
     private $descriptionArray;
 
 
+    /**
+     * TaskTemplateBuilder constructor.
+     * @param array $nameTxArray
+     */
     public function __construct(array $nameTxArray)
     {
         $this->nameTxArray = $nameTxArray;
         $this->taskTemplate = new TaskTemplate();
     }
 
+    /**
+     * @param TaskableInterface $taskable
+     */
     public function setSubject(TaskableInterface $taskable)
     {
         $this->taskTemplate->taskable()->associate($taskable);
     }
 
+    /**
+     * @param DelegatableInterface $delegatable
+     */
     public function setDelegator(DelegatableInterface $delegatable)
     {
         $this->taskTemplate->delegatable()->associate($delegatable);
     }
 
+    /**
+     * @param AssignableInterface $assignable
+     */
     public function setAssigned(AssignableInterface $assignable)
     {
         $this->taskTemplate->assignable()->associate($assignable);
     }
 
+    /**
+     * @param array $descriptionArray
+     */
     public function setDescription(array $descriptionArray)
     {
         $this->descriptionArray = $descriptionArray;
     }
 
+    /**
+     * Build TaskTemplate
+     */
     public function build()
     {
         DB::transaction(function () {
@@ -64,6 +87,9 @@ class TaskTemplateBuilder implements TaskTemplateBuilderInterface
         });
     }
 
+    /**
+     * @throws \Exception
+     */
     private function storeName()
     {
         $setter = new TaxonomySetter(
@@ -78,6 +104,9 @@ class TaskTemplateBuilder implements TaskTemplateBuilderInterface
         $this->taskTemplate->name_tx_id = $nameTx->id;
     }
 
+    /**
+     * @throws \Exception
+     */
     private function storeDescription()
     {
         $setter = new DescriptionSetter(
@@ -91,6 +120,9 @@ class TaskTemplateBuilder implements TaskTemplateBuilderInterface
         $this->taskTemplate->description_id = $description->id;
     }
 
+    /**
+     * @return TaskTemplate
+     */
     public function get(): TaskTemplate
     {
         return $this->taskTemplate;
