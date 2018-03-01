@@ -13,7 +13,7 @@ class CreateTaskTemplateTaskTemplateRuntimeTable extends Migration
      */
     public function up()
     {
-        Schema::create('task_template_task_template_runtime', function (Blueprint $table) {
+        Schema::create('task_template_tt_runtime', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('task_template_id')->unsigned();
@@ -31,11 +31,11 @@ class CreateTaskTemplateTaskTemplateRuntimeTable extends Migration
      */
     public function down()
     {
-        Schema::table('task_template_task_template_runtime', function (Blueprint $table) {
+        Schema::table('task_template_tt_runtime', function (Blueprint $table) {
             $table->dropForeign(['task_template_id']);
             $table->dropForeign(['task_template_runtime_id']);
         });
 
-        Schema::dropIfExists('task_template_task_template_runtime');
+        Schema::dropIfExists('task_template_tt_runtime');
     }
 }
