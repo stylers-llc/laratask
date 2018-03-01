@@ -43,6 +43,6 @@ class TaskTemplateRuntime extends Model
 
     public function taskTemplates()
     {
-        return $this->belongsToMany(TaskTemplate::class, 'task_template_task_template_runtime');
+        return $this->belongsToMany(TaskTemplate::class, 'task_template_tt_runtime');
     }
 }
