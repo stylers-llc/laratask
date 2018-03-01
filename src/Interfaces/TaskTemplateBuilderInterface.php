@@ -8,6 +8,8 @@ interface TaskTemplateBuilderInterface
 {
     public function __construct(array $nameTxArray);
 
+    public function setTaskTemplate(TaskTemplate $taskTemplate);
+
     public function setDescription(array $descriptionArray);
 
     public function setSubject(TaskableInterface $taskable);

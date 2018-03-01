@@ -44,6 +44,14 @@ class TaskTemplateBuilder implements TaskTemplateBuilderInterface
     }
 
     /**
+     * @param TaskTemplate $taskTemplate
+     */
+    public function setTaskTemplate(TaskTemplate $taskTemplate)
+    {
+        $this->taskTemplate = $taskTemplate;
+    }
+
+    /**
      * @param TaskableInterface $taskable
      */
     public function setSubject(TaskableInterface $taskable)
@@ -99,7 +107,7 @@ class TaskTemplateBuilder implements TaskTemplateBuilderInterface
         );
         $nameTx = $setter->set();
 
-//        TODO
+//        TODO 
 //        $this->taskTemplate->name()->associate($nameTx);
         $this->taskTemplate->name_tx_id = $nameTx->id;
     }
