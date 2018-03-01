@@ -5,14 +5,16 @@ namespace Stylers\Laratask\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Stylers\Taxonomy\Models\Taxonomy;
+use Stylers\Taxonomy\Models\Traits\TxTranslatable;
 
 /**
  * Class TaskRuntime
  * @package Stylers\Laratask\Models
  */
-class TaskRuntime extends Model
+class TaskTemplateRuntime extends Model
 {
     use SoftDeletes;
+    use TxTranslatable;
 
     /**
      * Fillable
@@ -41,6 +43,6 @@ class TaskRuntime extends Model
 
     public function taskTemplates()
     {
-        return $this->belongsToMany(TaskTemplate::class, 'task_template_task_runtime');
+        return $this->belongsToMany(TaskTemplate::class, 'task_template_task_template_runtime');
     }
 }

@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Stylers\Taxonomy\Models\Description;
 use Stylers\Taxonomy\Models\Taxonomy;
+use Stylers\Taxonomy\Models\Traits\TxTranslatable;
 
 class TaskTemplate extends Model
 {
     use SoftDeletes;
+    use TxTranslatable;
 
     /**
      * Fillable
@@ -37,7 +39,7 @@ class TaskTemplate extends Model
 
     public function taskRuntimes()
     {
-        return $this->belongsToMany(TaskRuntime::class, 'task_template_task_runtime');
+        return $this->belongsToMany(TaskTemplateRuntime::class, 'task_template_task_template_runtime');
     }
 
     public function delegatable()

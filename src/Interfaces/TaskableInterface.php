@@ -7,4 +7,6 @@ interface TaskableInterface
     public function taskedTaskTemplates();
 
     public function taskedTasks();
+
+    public function getName();
 }

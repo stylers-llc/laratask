@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTaskRuntimesTable extends Migration
+class CreateTaskTemplateRuntimesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTaskRuntimesTable extends Migration
      */
     public function up()
     {
-        Schema::create('task_runtimes', function (Blueprint $table) {
+        Schema::create('task_template_runtimes', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('name_tx_id')->unsigned();
@@ -37,10 +37,10 @@ class CreateTaskRuntimesTable extends Migration
      */
     public function down()
     {
-        Schema::table('task_runtimes', function (Blueprint $table) {
+        Schema::table('task_template_runtimes', function (Blueprint $table) {
             $table->dropForeign(['name_tx_id']);
         });
 
-        Schema::dropIfExists('task_runtimes');
+        Schema::dropIfExists('task_template_runtimes');
     }
 }

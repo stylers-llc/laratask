@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTaskTemplateTaskRuntimeTable extends Migration
+class CreateTaskTemplateTaskTemplateRuntimeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateTaskTemplateTaskRuntimeTable extends Migration
      */
     public function up()
     {
-        Schema::create('task_template_task_runtime', function (Blueprint $table) {
+        Schema::create('task_template_task_template_runtime', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('task_template_id')->unsigned();
-            $table->integer('task_runtime_id')->unsigned();
+            $table->integer('task_template_runtime_id')->unsigned();
 
             $table->foreign('task_template_id')->references('id')->on('task_templates');
-            $table->foreign('task_runtime_id')->references('id')->on('task_runtimes');
+            $table->foreign('task_template_runtime_id')->references('id')->on('task_template_runtimes');
         });
     }
 
@@ -31,11 +31,11 @@ class CreateTaskTemplateTaskRuntimeTable extends Migration
      */
     public function down()
     {
-        Schema::table('task_template_task_runtime', function (Blueprint $table) {
+        Schema::table('task_template_task_template_runtime', function (Blueprint $table) {
             $table->dropForeign(['task_template_id']);
-            $table->dropForeign(['task_runtime_id']);
+            $table->dropForeign(['task_template_runtime_id']);
         });
 
-        Schema::dropIfExists('task_template_task_runtime');
+        Schema::dropIfExists('task_template_task_template_runtime');
     }
 }

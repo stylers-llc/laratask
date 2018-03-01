@@ -18,6 +18,7 @@ php artisan vendor:publish --provider="Stylers\Laratask\Providers\LarataskServic
 You need to run the migrations for this package.
 ```bash
 php artisan migrate
+php artisan db:seed --class="Stylers\Laratask\Database\Seeds\LarataskTaxonomiesTableSeeder"
 ```
 
 ## Usage

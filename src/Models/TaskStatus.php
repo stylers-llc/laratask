@@ -5,6 +5,7 @@ namespace Stylers\Laratask\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Stylers\Taxonomy\Models\Taxonomy;
+use Stylers\Taxonomy\Models\Traits\TxTranslatable;
 
 /**
  * Class TaskStatus
@@ -13,6 +14,7 @@ use Stylers\Taxonomy\Models\Taxonomy;
 class TaskStatus extends Model
 {
     use SoftDeletes;
+    use TxTranslatable;
 
     protected $table = 'taxonomies';
 
