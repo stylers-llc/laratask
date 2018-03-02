@@ -31,8 +31,8 @@ class TaskTemplateRuntime extends Model
      * @var array
      */
     protected $casts = [
-        'start_at' => 'date',
-        'end_at' => 'date',
+        'start_at' => 'datetime',
+        'end_at' => 'datetime',
         'exclude_start_date' => 'bool',
     ];
 
