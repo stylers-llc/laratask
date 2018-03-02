@@ -2,6 +2,7 @@
 
 namespace Stylers\Laratask\Builders;
 
+
 use Illuminate\Support\Facades\DB;
 use Stylers\Laratask\Interfaces\DateIntervalInterface;
 use Stylers\Laratask\Interfaces\TaskTemplateRuntimeBuilderInterface;
@@ -19,11 +20,6 @@ class TaskTemplateRuntimeBuilder implements TaskTemplateRuntimeBuilderInterface
      * @var $taskTemplateRuntime
      */
     private $taskTemplateRuntime;
-
-    /**
-     * @var array
-     */
-    private $nameTxArray;
 
     /**
      * @var DateTimeInterface
@@ -47,11 +43,9 @@ class TaskTemplateRuntimeBuilder implements TaskTemplateRuntimeBuilderInterface
 
     /**
      * TaskTemplateBuilder constructor.
-     * @param array $nameTxArray
      */
-    public function __construct(array $nameTxArray)
+    public function __construct()
     {
-        $this->nameTxArray = $nameTxArray;
         $this->taskTemplateRuntime = new TaskTemplateRuntime();
     }
 
@@ -101,8 +95,6 @@ class TaskTemplateRuntimeBuilder implements TaskTemplateRuntimeBuilderInterface
     public function build()
     {
         DB::transaction(function () {
-            $this->storeName();
-
             $this->taskTemplateRuntime->start_at = $this->startAt;
             $this->taskTemplateRuntime->end_at = $this->endAt;
             $this->taskTemplateRuntime->exclude_start_date = $this->excludeStartDate;
@@ -110,20 +102,6 @@ class TaskTemplateRuntimeBuilder implements TaskTemplateRuntimeBuilderInterface
 
             $this->taskTemplateRuntime->save();
         });
-    }
-
-    /**
-     * @throws \Exception
-     */
-    private function storeName()
-    {
-        $setter = new TaxonomySetter(
-            $this->nameTxArray['translations'],
-            $this->taskTemplateRuntime->name_tx_id,
-            config("laratask.taxonomy.task_template_runtime_names")
-        );
-        $nameTx = $setter->set();
-        $this->taskTemplateRuntime->name_tx_id = $nameTx->id;
     }
 
     /**

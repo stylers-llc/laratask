@@ -2,8 +2,13 @@
 
 namespace Stylers\Laratask\Interfaces;
 
+
 use Stylers\Laratask\Models\TaskTemplate;
 
+/**
+ * Interface TaskTemplateBuilderInterface
+ * @package Stylers\Laratask\Interfaces
+ */
 interface TaskTemplateBuilderInterface
 {
     public function __construct(array $nameTxArray);

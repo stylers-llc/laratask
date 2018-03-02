@@ -17,6 +17,7 @@ class CreateTasksTable extends Migration
             $table->increments('id');
 
             $table->integer('task_template_id')->unsigned();
+            $table->integer('task_template_runtime_id')->unsigned();
             $table->integer('status_tx_id')->unsigned();
 
             $table->integer('executable_id')->nullable();
@@ -29,6 +30,7 @@ class CreateTasksTable extends Migration
             $table->softDeletes();
 
             $table->foreign('task_template_id')->references('id')->on('task_templates');
+            $table->foreign('task_template_runtime_id')->references('id')->on('task_template_runtimes');
             $table->foreign('status_tx_id')->references('id')->on('taxonomies');
         });
     }
@@ -42,6 +44,7 @@ class CreateTasksTable extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->dropForeign(['task_template_id']);
+            $table->dropForeign(['task_template_runtime_id']);
             $table->dropForeign(['status_tx_id']);
         });
 

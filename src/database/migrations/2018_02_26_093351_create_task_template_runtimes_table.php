@@ -16,8 +16,6 @@ class CreateTaskTemplateRuntimesTable extends Migration
         Schema::create('task_template_runtimes', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('name_tx_id')->unsigned();
-
             $table->dateTime('start_at');
             $table->dateTime('end_at')->nullable();
             $table->boolean('exclude_start_date')->default(false);
@@ -25,8 +23,6 @@ class CreateTaskTemplateRuntimesTable extends Migration
 
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('name_tx_id')->references('id')->on('taxonomies');
         });
     }
 
@@ -37,10 +33,6 @@ class CreateTaskTemplateRuntimesTable extends Migration
      */
     public function down()
     {
-        Schema::table('task_template_runtimes', function (Blueprint $table) {
-            $table->dropForeign(['name_tx_id']);
-        });
-
         Schema::dropIfExists('task_template_runtimes');
     }
 }

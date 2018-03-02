@@ -2,6 +2,7 @@
 
 namespace Stylers\Laratask\Builders;
 
+
 use Illuminate\Support\Facades\DB;
 use Stylers\Laratask\Interfaces\AssignableInterface;
 use Stylers\Laratask\Interfaces\DelegatableInterface;

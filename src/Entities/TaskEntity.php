@@ -2,11 +2,16 @@
 
 namespace Stylers\Laratask\Entities;
 
+
 use Stylers\Laratask\Entities\Traits\Collectionable;
 use Stylers\Laratask\Entities\Traits\TxName;
 use Stylers\Laratask\Interfaces\EntityInterface;
 use Stylers\Laratask\Models\Task;
 
+/**
+ * Class TaskEntity
+ * @package Stylers\Laratask\Entities
+ */
 class TaskEntity implements EntityInterface
 {
     use Collectionable;

@@ -2,6 +2,7 @@
 
 namespace Stylers\Laratask\Providers;
 
+
 use Illuminate\Support\ServiceProvider;
 
 /**

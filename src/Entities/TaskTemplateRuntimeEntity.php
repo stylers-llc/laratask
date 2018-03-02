@@ -7,10 +7,13 @@ use Stylers\Laratask\Entities\Traits\TxName;
 use Stylers\Laratask\Interfaces\EntityInterface;
 use Stylers\Laratask\Models\TaskTemplateRuntime;
 
+/**
+ * Class TaskTemplateRuntimeEntity
+ * @package Stylers\Laratask\Entities
+ */
 class TaskTemplateRuntimeEntity implements EntityInterface
 {
     use Collectionable;
-    use TxName;
 
     /**
      * @var TaskTemplateRuntime
@@ -35,7 +38,6 @@ class TaskTemplateRuntimeEntity implements EntityInterface
         $model = $this->model;
         $data = [
             'id' => $model->id,
-            'name' => $this->getName(),
             'start_at' => $model->start_at->format('Y-m-d H:i:s'),
             'end_at' => $model->end_at ? $model->end_at->format('Y-m-d H:i:s') : null,
             'exclude_start_date' => $model->exclude_start_date,

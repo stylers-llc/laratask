@@ -2,19 +2,17 @@
 
 namespace Stylers\Laratask\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Stylers\Taxonomy\Models\Taxonomy;
-use Stylers\Taxonomy\Models\Traits\TxTranslatable;
 
 /**
- * Class TaskRuntime
+ * Class TaskTemplateRuntime
  * @package Stylers\Laratask\Models
  */
 class TaskTemplateRuntime extends Model
 {
     use SoftDeletes;
-    use TxTranslatable;
 
     /**
      * Fillable
@@ -36,13 +34,19 @@ class TaskTemplateRuntime extends Model
         'exclude_start_date' => 'bool',
     ];
 
-    public function name()
-    {
-        return $this->hasOne(Taxonomy::class, 'id', 'name_tx_id');
-    }
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function taskTemplates()
     {
         return $this->belongsToMany(TaskTemplate::class, 'task_template_tt_runtime');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'task_template_runtime_id');
     }
 }

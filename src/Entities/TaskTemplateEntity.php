@@ -2,12 +2,17 @@
 
 namespace Stylers\Laratask\Entities;
 
+
 use Stylers\Laratask\Entities\Traits\Collectionable;
 use Stylers\Laratask\Entities\Traits\Description;
 use Stylers\Laratask\Entities\Traits\TxName;
 use Stylers\Laratask\Interfaces\EntityInterface;
 use Stylers\Laratask\Models\TaskTemplate;
 
+/**
+ * Class TaskTemplateEntity
+ * @package Stylers\Laratask\Entities
+ */
 class TaskTemplateEntity implements EntityInterface
 {
     use Collectionable;
@@ -47,6 +52,9 @@ class TaskTemplateEntity implements EntityInterface
         return $data;
     }
 
+    /**
+     * @return array|null
+     */
     private function getTaskableData()
     {
         if (!$this->model->taskable) return null;
@@ -59,6 +67,9 @@ class TaskTemplateEntity implements EntityInterface
         ];
     }
 
+    /**
+     * @return array|null
+     */
     private function getDelegatableData()
     {
         if (!$this->model->delegatable) return null;
@@ -71,6 +82,9 @@ class TaskTemplateEntity implements EntityInterface
         ];
     }
 
+    /**
+     * @return array|null
+     */
     private function getAssignableData()
     {
         if (!$this->model->assignable) return null;

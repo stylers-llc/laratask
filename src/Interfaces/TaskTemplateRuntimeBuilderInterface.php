@@ -2,11 +2,16 @@
 
 namespace Stylers\Laratask\Interfaces;
 
+
 use Stylers\Laratask\Models\TaskTemplateRuntime;
 
+/**
+ * Interface TaskTemplateRuntimeBuilderInterface
+ * @package Stylers\Laratask\Interfaces
+ */
 interface TaskTemplateRuntimeBuilderInterface
 {
-    public function __construct(array $nameTxArray);
+    public function __construct();
 
     public function setTaskTemplateRuntime(TaskTemplateRuntime $taskTemplateRuntime);
 
