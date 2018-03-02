@@ -107,7 +107,7 @@ class TaskTemplateBuilder implements TaskTemplateBuilderInterface
         );
         $nameTx = $setter->set();
 
-//        TODO 
+//        TODO Baum can not associate
 //        $this->taskTemplate->name()->associate($nameTx);
         $this->taskTemplate->name_tx_id = $nameTx->id;
     }
@@ -123,7 +123,7 @@ class TaskTemplateBuilder implements TaskTemplateBuilderInterface
         );
         $description = $setter->set();
 
-//        TODO
+//        TODO Baum can not associate
 //        $this->taskTemplate->description()->associate(description);
         $this->taskTemplate->description_id = $description->id;
     }
