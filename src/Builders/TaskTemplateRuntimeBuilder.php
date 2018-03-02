@@ -129,7 +129,7 @@ class TaskTemplateRuntimeBuilder implements TaskTemplateRuntimeBuilderInterface
     /**
      * @return TaskTemplateRuntime
      */
-    public function get(): TaskTemplateRuntime
+    public function getTaskTemplateRuntime(): TaskTemplateRuntime
     {
         return $this->taskTemplateRuntime;
     }

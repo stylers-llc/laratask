@@ -21,5 +21,5 @@ interface TaskTemplateRuntimeBuilderInterface
 
     public function build();
 
-    public function get(): TaskTemplateRuntime;
+    public function getTaskTemplateRuntime(): TaskTemplateRuntime;
 }

@@ -20,5 +20,5 @@ interface TaskTemplateBuilderInterface
 
     public function build();
 
-    public function get(): TaskTemplate;
+    public function getTaskTemplate(): TaskTemplate;
 }

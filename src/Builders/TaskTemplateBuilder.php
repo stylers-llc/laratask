@@ -131,7 +131,7 @@ class TaskTemplateBuilder implements TaskTemplateBuilderInterface
     /**
      * @return TaskTemplate
      */
-    public function get(): TaskTemplate
+    public function getTaskTemplate(): TaskTemplate
     {
         return $this->taskTemplate;
     }
