@@ -45,7 +45,7 @@ class User extends Authenticatable implements AssignableInterface, DelegatableIn
 #### Create TaskTemplate
 ```php
 /**
- * @param Stylers\Requests\StoreTaskTemplate $request
+ * @param Stylers\Laratask\Requests\StoreTaskTemplate $request
  */
 public function store(StoreTaskTemplate $request)
 {
@@ -65,8 +65,8 @@ public function store(StoreTaskTemplate $request)
 #### Update TaskTemplate
 ```php
 /**
- * @param Stylers\Requests\UpdateTaskTemplate $request
- * @param Stylers\Models\TaskTemplate $taskTemplate
+ * @param Stylers\Laratask\Requests\UpdateTaskTemplate $request
+ * @param Stylers\Laratask\Models\TaskTemplate $taskTemplate
  */
 public function update(UpdateTaskTemplate $request, TaskTemplate $taskTemplate)
 {
