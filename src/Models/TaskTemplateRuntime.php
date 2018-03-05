@@ -35,6 +35,14 @@ class TaskTemplateRuntime extends Model
     ];
 
     /**
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return $this->start_at->format('Y-m-d H:i') . ' ' . trans('date_interval.' . $this->date_interval);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function taskTemplates()
