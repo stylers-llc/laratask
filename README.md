@@ -39,6 +39,7 @@ class User extends Authenticatable implements AssignableInterface, DelegatableIn
     use Assignable;
     use Delegatable;
     use Executable;
+}
 ```
 
 #### Create TaskTemplate
