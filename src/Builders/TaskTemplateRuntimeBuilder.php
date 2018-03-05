@@ -98,7 +98,7 @@ class TaskTemplateRuntimeBuilder implements TaskTemplateRuntimeBuilderInterface
             $this->taskTemplateRuntime->start_at = $this->startAt;
             $this->taskTemplateRuntime->end_at = $this->endAt;
             $this->taskTemplateRuntime->exclude_start_date = $this->excludeStartDate;
-            $this->taskTemplateRuntime->date_interval = $this->dateInterval->__toString();
+            $this->taskTemplateRuntime->date_interval = $this->dateInterval ? $this->dateInterval->__toString() : null;
 
             $this->taskTemplateRuntime->save();
         });
