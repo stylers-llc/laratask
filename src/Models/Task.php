@@ -23,7 +23,8 @@ class Task extends Model
         'deadline_at',
         'executed_at',
         'status_tx_id',
-        'task_template_id'
+        'task_template_id',
+        'task_template_runtime_id'
     ];
     /**
      * Attribute Casting
@@ -64,5 +65,29 @@ class Task extends Model
     public function status()
     {
         return $this->hasOne(Taxonomy::class, 'id', 'status_tx_id');
+    }
+
+    public static function createIfNotExists(TaskTemplate $template, TaskTemplateRuntime $runtime, \DateTimeInterface $day = null)
+    {
+        $deadline = $runtime->start_at->format("Y-m-d H:i:s");
+        if($day) {
+            $deadline = $day->format("Y-m-d H:i:s");
+        }
+
+        $task = Task::where('task_template_id', $template->id)
+            ->where('deadline_at', $deadline)
+            ->where('task_template_runtime_id', $runtime->id)
+            ->first();
+
+        if(is_null($task)) {
+            $task = new self();
+            $task->task_template_id = $template->id;
+            $task->task_template_runtime_id = $runtime->id;
+            $task->deadline_at = $deadline;
+            $task->status_tx_id = config('laratask.taxonomy.task_statuses.created.id');
+            $task->save();
+        }
+
+        return $task;
     }
 }
