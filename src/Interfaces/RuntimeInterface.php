@@ -1,6 +1,6 @@
 <?php
 
-namespace Stylers\Laratask\Generators\Runtimes;
+namespace Stylers\Laratask\Interfaces;
 
 use Stylers\Laratask\Models\TaskTemplate;
 use Stylers\Laratask\Models\TaskTemplateRuntime;

@@ -3,6 +3,7 @@
 namespace Stylers\Laratask\Generators\Runtimes;
 
 use Carbon\Carbon;
+use Stylers\Laratask\Interfaces\RuntimeInterface;
 use Stylers\Laratask\Models\Task;
 use Stylers\Laratask\Models\TaskTemplate;
 use Stylers\Laratask\Models\TaskTemplateRuntime;

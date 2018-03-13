@@ -17,7 +17,7 @@ class CheckTaskTemplateEvent
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param TaskTemplate $template
      */
     public function __construct(TaskTemplate $template)
     {

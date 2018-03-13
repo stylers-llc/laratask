@@ -4,7 +4,7 @@ namespace Stylers\Laratask\Listeners;
 
 
 use Stylers\Laratask\Events\CheckTaskTemplateEvent;
-use Illuminate\Support\Facades\Config;
+use Stylers\Laratask\Generators\TaskGenerator;
 
 class CheckAndGenerateTasks
 {
@@ -24,6 +24,7 @@ class CheckAndGenerateTasks
      */
     public function handle(CheckTaskTemplateEvent $event)
     {
-        var_dump($event->taskTemplate);
+        $generator = new TaskGenerator($event->taskTemplate);
+        $generator->generate();
     }
 }

@@ -9,8 +9,8 @@ use \Stylers\Laratask\Listeners\CheckAndGenerateTasks;
 class LarataskEventServiceProvider extends EventServiceProvider
 {
     protected $listen = [
-        [
-            CheckTaskTemplateEvent::class => CheckAndGenerateTasks::class
+        CheckTaskTemplateEvent::class => [
+            CheckAndGenerateTasks::class
         ]
     ];
 }
