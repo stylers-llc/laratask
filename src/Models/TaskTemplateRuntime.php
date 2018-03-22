@@ -47,7 +47,9 @@ class TaskTemplateRuntime extends Model
      */
     public function taskTemplates()
     {
-        return $this->belongsToMany(TaskTemplate::class, 'task_template_tt_runtime');#->using(TaskTemplateTaskRuntime::class);
+        return $this->belongsToMany(TaskTemplate::class, 'task_template_tt_runtime')
+//            ->using(TaskTemplateTaskRuntime::class)
+            ->whereNull('task_template_tt_runtime.deleted_at');
     }
 
     /**
@@ -58,28 +60,29 @@ class TaskTemplateRuntime extends Model
         return $this->hasMany(Task::class, 'task_template_runtime_id');
     }
 
-    public function calculateNextDate(\DateTimeInterface $day) {
+    public function calculateNextDate(\DateTimeInterface $day)
+    {
         $nextDate = clone $this->start_at;
 
-        if($this->start_at >= $day) {
-            if(!$this->exclude_start_date) {
+        if ($this->start_at >= $day) {
+            if (!$this->exclude_start_date) {
                 return $nextDate;
             }
 
             $nextDate->add(new \DateInterval($this->date_interval));
 
-            if($this->end_at >= $nextDate) {
+            if ($this->end_at >= $nextDate) {
                 return $nextDate;
             }
 
             return null;
         }
 
-        if($this->end_at && $this->end_at < $day) {
+        if ($this->end_at && $this->end_at < $day) {
             return null;
         }
 
-        while($day->format('U') >= $nextDate->format('U')) {
+        while ($day->format('U') >= $nextDate->format('U')) {
             $nextDate->add(new \DateInterval($this->date_interval));
         }
 

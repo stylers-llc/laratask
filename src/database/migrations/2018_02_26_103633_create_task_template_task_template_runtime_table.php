@@ -19,6 +19,9 @@ class CreateTaskTemplateTaskTemplateRuntimeTable extends Migration
             $table->integer('task_template_id')->unsigned();
             $table->integer('task_template_runtime_id')->unsigned();
 
+            $table->timestamps();
+            $table->softDeletes();
+
             $table->foreign('task_template_id')->references('id')->on('task_templates');
             $table->foreign('task_template_runtime_id')->references('id')->on('task_template_runtimes');
         });

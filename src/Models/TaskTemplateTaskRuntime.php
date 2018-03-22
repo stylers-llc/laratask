@@ -2,11 +2,13 @@
 
 namespace Stylers\Laratask\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TaskTemplateTaskRuntime extends Pivot
 {
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -22,30 +24,37 @@ class TaskTemplateTaskRuntime extends Pivot
     protected $fillable = [
         'task_template_id',
         'task_template_runtime_id',
-        'next_at'
     ];
 
     /**
-     * Disable timestamps (created_at, updated_at, deleted_at) on pivot
-     * @var bool
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public $timestamps = false;
-
-    /**
-     * Attribute Casting
-     * @var array
-     */
-    protected $casts = [
-        'next_at' => 'datetime'
-    ];
-
     public function taskTemplate()
     {
         return $this->hasOne(TaskTemplate::class, 'id', 'task_template_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function taskRuntime()
     {
         return $this->hasOne(TaskTemplateRuntime::class, 'id', 'task_template_runtime_id');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreatedAtColumn()
+    {
+        return 'created_at';
+    }
+
+    /**
+     * @return string
+     */
+    public function getUpdatedAtColumn()
+    {
+        return 'updated_at';
     }
 }

@@ -56,7 +56,10 @@ class TaskTemplate extends Model
      */
     public function taskTemplateRuntimes()
     {
-        return $this->belongsToMany(TaskTemplateRuntime::class, 'task_template_tt_runtime');#->using(TaskTemplateTaskRuntime::class);
+        return $this->belongsToMany(TaskTemplateRuntime::class, 'task_template_tt_runtime')
+//            ->using(TaskTemplateTaskRuntime::class)
+            ->whereNull('task_template_tt_runtime.deleted_at');
+
     }
 
     /**
@@ -174,7 +177,6 @@ class TaskTemplate extends Model
                 $taskTemplateTaskRuntimes->push($taskTemplateTaskRuntime);
             }
         });
-
         return $taskTemplateTaskRuntimes;
 //        return $this->taskTemplateRuntimes;
     }
