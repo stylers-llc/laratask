@@ -154,20 +154,22 @@ class TaskTemplate extends Model
      */
     public function syncTaskTemplateRuntimes(array $ids)
     {
-        $taskTemplateTaskRuntimes = TaskTemplateTaskRuntime::where('task_template_id', $this->id)
-            ->whereNotIn('task_template_runtime_id', $ids)
-            ->get();
+        DB::transaction(function () use ($ids) {
+            $destroyableTaskTemplateTaskRuntimes = TaskTemplateTaskRuntime::where('task_template_id', $this->id)
+                ->whereNotIn('task_template_runtime_id', $ids)
+                ->get();
 
-        if ($taskTemplateTaskRuntimes) {
-            TaskTemplateTaskRuntime::destroy($taskTemplateTaskRuntimes->pluck('id')->toArray());
-        }
+            if ($destroyableTaskTemplateTaskRuntimes) {
+                TaskTemplateTaskRuntime::destroy($destroyableTaskTemplateTaskRuntimes->pluck('id')->toArray());
+            }
 
-        foreach ($ids as $id) {
-            TaskTemplateTaskRuntime::updateOrCreate([
-                'task_template_id' => $this->id,
-                'task_template_runtime_id' => $id,
-            ]);
-        }
+            foreach ($ids as $id) {
+                TaskTemplateTaskRuntime::updateOrCreate([
+                    'task_template_id' => $this->id,
+                    'task_template_runtime_id' => $id,
+                ]);
+            }
+        });
 
         return $this->taskTemplateRuntimes;
     }
