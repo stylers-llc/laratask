@@ -6,6 +6,7 @@ namespace Stylers\Laratask\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Stylers\Taxonomy\Models\Description;
@@ -150,11 +151,11 @@ class TaskTemplate extends Model
 
     /**
      * @param array $ids
-     * @return mixed
+     * @return Collection of TaskTemplateTaskRuntime
      */
     public function syncTaskTemplateRuntimes(array $ids)
     {
-        DB::transaction(function () use ($ids) {
+        DB::transaction(function () use (&$taskTemplateTaskRuntimes, $ids) {
             $destroyableTaskTemplateTaskRuntimes = TaskTemplateTaskRuntime::where('task_template_id', $this->id)
                 ->whereNotIn('task_template_runtime_id', $ids)
                 ->get();
@@ -163,14 +164,18 @@ class TaskTemplate extends Model
                 TaskTemplateTaskRuntime::destroy($destroyableTaskTemplateTaskRuntimes->pluck('id')->toArray());
             }
 
+            $taskTemplateTaskRuntimes = new Collection();
             foreach ($ids as $id) {
-                TaskTemplateTaskRuntime::updateOrCreate([
+                $taskTemplateTaskRuntime = TaskTemplateTaskRuntime::updateOrCreate([
                     'task_template_id' => $this->id,
                     'task_template_runtime_id' => $id,
                 ]);
+
+                $taskTemplateTaskRuntimes->push($taskTemplateTaskRuntime);
             }
         });
 
-        return $this->taskTemplateRuntimes;
+        return $taskTemplateTaskRuntimes;
+//        return $this->taskTemplateRuntimes;
     }
 }
