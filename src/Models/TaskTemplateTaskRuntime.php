@@ -26,6 +26,12 @@ class TaskTemplateTaskRuntime extends Pivot
     ];
 
     /**
+     * Disable timestamps (created_at, updated_at, deleted_at) on pivot
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Attribute Casting
      * @var array
      */
@@ -33,11 +39,13 @@ class TaskTemplateTaskRuntime extends Pivot
         'next_at' => 'datetime'
     ];
 
-    public function taskTemplate() {
+    public function taskTemplate()
+    {
         return $this->hasOne(TaskTemplate::class, 'id', 'task_template_id');
     }
 
-    public function taskRuntime() {
+    public function taskRuntime()
+    {
         return $this->hasOne(TaskTemplateRuntime::class, 'id', 'task_template_runtime_id');
     }
 }

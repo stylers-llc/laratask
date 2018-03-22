@@ -1,6 +1,6 @@
 <?php
 
-namespace Stylers\Laratask\Commands;
+namespace Stylers\Laratask\Console\Commands;
 
 use Illuminate\Console\Command;
 use Stylers\Laratask\Events\CheckTaskTemplateEvent;

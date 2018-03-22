@@ -60,6 +60,19 @@ public function store(StoreTaskTemplate $request)
 
     $taskTemplate = $builder->getTaskTemplate();
 }
+
+/**
+ * @param $type
+ * @param $id
+ * @return null
+ * @todo Do not return null: I know but I need null -> like as first() method
+ */
+private function getModel($type, $id)
+{
+    if (!$type) return null;
+
+    return $type::findOrFail($id);
+}
 ```
 
 #### Update TaskTemplate
@@ -86,22 +99,62 @@ public function update(UpdateTaskTemplate $request, TaskTemplate $taskTemplate)
 
 #### Create TaskTemplateRuntime
 ```php
+/**
+ * @param Stylers\Laratask\Models\StoreTaskTemplateRuntime $request
+ */
+public function store(StoreTaskTemplateRuntime $request)
+{
+    $input = $request->only('start_at', 'end_at', 'date_interval');
 
+    $builder = new TaskTemplateRuntimeBuilder();
+    $builder->setStartAt(new Carbon($input['start_at']));
+    if ($input['date_interval']) $builder->setEndAt(new Carbon($input['end_at']));
+    if ($input['date_interval']) $builder->setDateInterval(new DateInterval($input['date_interval']));
+
+    $builder->build();
+}
 ```
 
 #### Update TaskTemplateRuntime
 ```php
+/**
+ * @param UpdateTaskTemplateRuntime $request
+ * @param Stylers\Laratask\Models\TaskTemplateRuntime $taskTemplateRuntime
+ */
+public function update(UpdateTaskTemplateRuntime $request, TaskTemplateRuntime $taskTemplateRuntime)
+{
+    $input = $request->only('start_at', 'end_at', 'date_interval');
 
+    $builder = new TaskTemplateRuntimeBuilder();
+    $builder->setTaskTemplateRuntime($taskTemplateRuntime);
+    $builder->setStartAt(new Carbon($input['start_at']));
+    if ($input['date_interval']) $builder->setEndAt(new Carbon($input['end_at']));
+    if ($input['date_interval']) $builder->setDateInterval(new DateInterval($input['date_interval']));
+
+    $builder->build();
+}
 ```
 
-#### Attach TaskTemplateRuntime to TaskTemplate
+#### Sync (attach, detach) TaskTemplateRuntime to TaskTemplate
 ```php
+/**
+ * @param Request $request
+ * @param Stylers\Laratask\Models\TaskTemplate $taskTemplate
+ */
+public function addRuntime(Request $request, TaskTemplate $taskTemplate)
+{
+    $ids = $request->input('task_template_runtime_id');
+    $taskTemplate->syncTaskTemplateRuntimes($ids);
 
+}
 ```
 
 #### Create Task
+The Task is auto generated when TaskTemplateRuntime attached to TaskTemplate
 ```php
+use Illuminate\Support\Facades\Artisan;
 
+Artisan::call('task:generate');
 ```
 
 #### Update Task

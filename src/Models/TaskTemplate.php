@@ -6,6 +6,7 @@ namespace Stylers\Laratask\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Stylers\Taxonomy\Models\Description;
 use Stylers\Taxonomy\Models\Taxonomy;
@@ -83,7 +84,7 @@ class TaskTemplate extends Model
 
     public function getActualTemplateRuntimes(\DateTimeInterface $day = null)
     {
-        if(is_null($day)) {
+        if (is_null($day)) {
             $day = Carbon::today()->hour(0)->minute(0)->second(0);
         }
 
@@ -145,5 +146,29 @@ class TaskTemplate extends Model
 
 
         return TaskTemplateRuntime::whereIn('id', $runtimeIds)->get();
+    }
+
+    /**
+     * @param array $ids
+     * @return mixed
+     */
+    public function syncTaskTemplateRuntimes(array $ids)
+    {
+        $taskTemplateTaskRuntimes = TaskTemplateTaskRuntime::where('task_template_id', $this->id)
+            ->whereNotIn('task_template_runtime_id', $ids)
+            ->get();
+
+        if ($taskTemplateTaskRuntimes) {
+            TaskTemplateTaskRuntime::destroy($taskTemplateTaskRuntimes->pluck('id')->toArray());
+        }
+
+        foreach ($ids as $id) {
+            TaskTemplateTaskRuntime::updateOrCreate([
+                'task_template_id' => $this->id,
+                'task_template_runtime_id' => $id,
+            ]);
+        }
+
+        return $this->taskTemplateRuntimes;
     }
 }

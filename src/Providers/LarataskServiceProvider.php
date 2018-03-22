@@ -4,7 +4,7 @@ namespace Stylers\Laratask\Providers;
 
 
 use Illuminate\Support\ServiceProvider;
-use Stylers\Laratask\Commands\TaskGeneratorCommand;
+use Stylers\Laratask\Console\Commands\TaskGeneratorCommand;
 
 /**
  * Class LarataskServiceProvider
@@ -26,12 +26,6 @@ class LarataskServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config' => config_path(),
         ], 'config');
-
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                TaskGeneratorCommand::class
-            ]);
-        }
     }
 
     /**
@@ -41,6 +35,9 @@ class LarataskServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->commands(TaskGeneratorCommand::class);
+
         $this->app->register(LarataskEventServiceProvider::class);
+        $this->app->register(LarataskObserverServiceProvider::class);
     }
 }
