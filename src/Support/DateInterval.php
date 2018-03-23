@@ -12,6 +12,19 @@ use Stylers\Laratask\Interfaces\DateIntervalInterface;
 class DateInterval extends \DateInterval implements DateIntervalInterface
 {
     /**
+     * @return float|int
+     */
+    public function __toSeconds()
+    {
+        return ($this->s)
+            + (60 * ($this->i))
+            + (60 * 60 * ($this->h))
+            + (24 * 60 * 60 * ($this->d))
+            + (30 * 24 * 60 * 60 * ($this->m))
+            + (365 * 24 * 60 * 60 * ($this->y));
+    }
+
+    /**
      * @return string
      */
     public function __toString(): string

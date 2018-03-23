@@ -2,7 +2,9 @@
 
 namespace Stylers\Laratask\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
+use Stylers\Laratask\Rules\DateDiffGreaterOrEqual;
 use Stylers\Laratask\Rules\IsDateInterval;
 
 class UpdateTaskTemplateRuntime extends FormRequest
@@ -27,7 +29,13 @@ class UpdateTaskTemplateRuntime extends FormRequest
         return [
             'start_at' => 'required|date',
             'end_at' => 'date|after:start_at',
-            'date_interval' => [new IsDateInterval()],
+            'date_interval' => [
+                new IsDateInterval(),
+                new DateDiffGreaterOrEqual(
+                    Carbon::parse($this->start_at),
+                    Carbon::parse($this->end_at)
+                )
+            ],
         ];
     }
 }
