@@ -153,6 +153,7 @@ public function addRuntime(Request $request, TaskTemplate $taskTemplate)
 
 #### Create Task
 The task is managing (create, delete - associate) in TaskTemplate::syncTaskTemplateRuntimes() method
+Task is managed by TaskTemplateTaskRuntimeObserver
 ```php
 use Illuminate\Support\Facades\Artisan;
 
@@ -172,5 +173,6 @@ php artisan task:generate
 ```
 
 ## TODO
+- [ ] Migrate Tests from Main project to Package
 - [ ] Release
 - [ ] Publish on Packagist
