@@ -100,7 +100,7 @@ public function update(UpdateTaskTemplate $request, TaskTemplate $taskTemplate)
 #### Create TaskTemplateRuntime
 ```php
 /**
- * @param Stylers\Laratask\Models\StoreTaskTemplateRuntime $request
+ * @param Stylers\Laratask\Requests\StoreTaskTemplateRuntime $request
  */
 public function store(StoreTaskTemplateRuntime $request)
 {
@@ -112,13 +112,14 @@ public function store(StoreTaskTemplateRuntime $request)
     if ($input['date_interval']) $builder->setDateInterval(new DateInterval($input['date_interval']));
 
     $builder->build();
+    $taskTemplateRuntime = $builder->getTaskTemplateRuntime();
 }
 ```
 
 #### Update TaskTemplateRuntime
 ```php
 /**
- * @param UpdateTaskTemplateRuntime $request
+ * @param Stylers\Laratask\Requests\UpdateTaskTemplateRuntime $request
  * @param Stylers\Laratask\Models\TaskTemplateRuntime $taskTemplateRuntime
  */
 public function update(UpdateTaskTemplateRuntime $request, TaskTemplateRuntime $taskTemplateRuntime)
@@ -128,10 +129,11 @@ public function update(UpdateTaskTemplateRuntime $request, TaskTemplateRuntime $
     $builder = new TaskTemplateRuntimeBuilder();
     $builder->setTaskTemplateRuntime($taskTemplateRuntime);
     $builder->setStartAt(new Carbon($input['start_at']));
-    if ($input['date_interval']) $builder->setEndAt(new Carbon($input['end_at']));
+    if ($input['end_at'] && $input['date_interval']) $builder->setEndAt(new Carbon($input['end_at']));
     if ($input['date_interval']) $builder->setDateInterval(new DateInterval($input['date_interval']));
 
     $builder->build();
+    $taskTemplateRuntime = $builder->getTaskTemplateRuntime();
 }
 ```
 
@@ -143,7 +145,7 @@ public function update(UpdateTaskTemplateRuntime $request, TaskTemplateRuntime $
  */
 public function addRuntime(Request $request, TaskTemplate $taskTemplate)
 {
-    $ids = $request->input('task_template_runtime_id');
+    $ids = (array)$request->input('task_template_runtime_id');
     $taskTemplate->syncTaskTemplateRuntimes($ids);
 
 }
