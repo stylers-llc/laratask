@@ -108,7 +108,7 @@ public function store(StoreTaskTemplateRuntime $request)
 
     $builder = new TaskTemplateRuntimeBuilder();
     $builder->setStartAt(new Carbon($input['start_at']));
-    if ($input['date_interval']) $builder->setEndAt(new Carbon($input['end_at']));
+    if ($input['end_at'] && $input['date_interval']) $builder->setEndAt(new Carbon($input['end_at']));
     if ($input['date_interval']) $builder->setDateInterval(new DateInterval($input['date_interval']));
 
     $builder->build();
@@ -137,7 +137,7 @@ public function update(UpdateTaskTemplateRuntime $request, TaskTemplateRuntime $
 }
 ```
 
-#### Sync (attach, detach) TaskTemplateRuntime to TaskTemplate
+#### Sync (attach, detach) TaskTemplateRuntime to TaskTemplate with Task managing
 ```php
 /**
  * @param Request $request
@@ -152,7 +152,7 @@ public function addRuntime(Request $request, TaskTemplate $taskTemplate)
 ```
 
 #### Create Task
-The Task is auto generated when TaskTemplateRuntime attached to TaskTemplate
+The task is managing (create, delete - associate) in TaskTemplate::syncTaskTemplateRuntimes() method
 ```php
 use Illuminate\Support\Facades\Artisan;
 
@@ -164,7 +164,13 @@ Artisan::call('task:generate');
 
 ```
 
-#### Attach Task to TaskTemplate, TaskTemplateRuntime
-```php
-
+#### Generate next Task
+```bash
+* * * * * php /path-to-your-project/artisan schedule:run >> /dev/null 2>&1
+# OR manually 
+php artisan task:generate
 ```
+
+## TODO
+- [ ] Release
+- [ ] Publish on Packagist

@@ -3,6 +3,7 @@
 namespace Stylers\Laratask\Providers;
 
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
 use Stylers\Laratask\Console\Commands\TaskGeneratorCommand;
 
@@ -26,6 +27,11 @@ class LarataskServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config' => config_path(),
         ], 'config');
+
+        $this->app->booted(function () {
+            $schedule = $this->app->make(Schedule::class);
+            $schedule->command(TaskGeneratorCommand::class)->daily(); // Run the task every day at midnight
+        });
     }
 
     /**
