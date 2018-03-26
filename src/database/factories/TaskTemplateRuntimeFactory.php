@@ -1,6 +1,7 @@
 <?php
 
 use Stylers\Laratask\Enums\TaskTemplateRuntimeInterval;
+use Stylers\Laratask\Support\DateInterval;
 use Faker\Generator as Faker;
 use Stylers\Laratask\Models\TaskTemplateRuntime;
 use Carbon\Carbon;
@@ -18,11 +19,19 @@ use Carbon\Carbon;
 
 $factory->define(TaskTemplateRuntime::class, function (Faker $faker) {
     $taskTemplateRuntimeIntervals = TaskTemplateRuntimeInterval::getConstants();
+    $intervalString = $taskTemplateRuntimeIntervals[array_rand($taskTemplateRuntimeIntervals)];
+    $startAt = Carbon::now();
+    $endAt = null;
+
+    if ($intervalString) {
+        $endAt = clone $startAt;
+        $endAt->add(new DateInterval($intervalString));
+    }
 
     return [
-        'start_at' => Carbon::now(),
-        'end_at' => null,
+        'start_at' => $startAt,
+        'end_at' => $endAt,
         'exclude_start_date' => false,
-        'date_interval' => $taskTemplateRuntimeIntervals[array_rand($taskTemplateRuntimeIntervals)],
+        'date_interval' => $intervalString,
     ];
 });
