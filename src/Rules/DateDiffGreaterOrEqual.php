@@ -2,6 +2,7 @@
 
 namespace Stylers\Laratask\Rules;
 
+
 use Illuminate\Contracts\Validation\Rule;
 use Stylers\Laratask\Support\DateInterval;
 

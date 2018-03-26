@@ -2,11 +2,16 @@
 
 namespace Stylers\Laratask\Enums;
 
+
 use Stylers\Laratask\Interfaces\EnumInterface;
 use \ReflectionClass;
 
 abstract class AbstractEnum implements EnumInterface
 {
+    /**
+     * @return array
+     * @throws \ReflectionException
+     */
     public static function getConstants(): array
     {
         $class = get_called_class();

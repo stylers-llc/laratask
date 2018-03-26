@@ -2,6 +2,7 @@
 
 namespace Stylers\Laratask\Enums;
 
+
 use Stylers\Laratask\Interfaces\EnumInterface;
 
 abstract class TaskTemplateRuntimeInterval extends AbstractEnum implements EnumInterface

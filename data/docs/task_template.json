@@ -43,7 +43,8 @@
       "executed_at": "2018-02-26 14:38:00",
       "executable": {
         "id": 2,
-        "type": "User"
+        "type": "User",
+        "name": "Jane Doe"
       }
     },
     {
@@ -53,7 +54,8 @@
       "executed_at": null,
       "executable": {
         "id": null,
-        "type": null
+        "type": null,
+        "name": null
       }
     }
   ]

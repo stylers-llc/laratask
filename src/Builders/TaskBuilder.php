@@ -2,6 +2,8 @@
 
 namespace Stylers\Laratask\Builders;
 
+
+use Illuminate\Support\Facades\DB;
 use Stylers\Laratask\Interfaces\ExecutableInterface;
 use Stylers\Laratask\Interfaces\TaskBuilderInterface;
 use Stylers\Laratask\Models\Task;
@@ -118,14 +120,19 @@ class TaskBuilder implements TaskBuilderInterface
         $this->executable = $executable;
     }
 
+    /**
+     * Build Task
+     */
     public function build()
     {
-        $this->task->deadline_at = $this->deadline_at;
-        $this->task->status_tx_id = $this->status->id;
-        $this->task->executable()->associate($this->executable);
-        $this->task->taskTemplate()->associate($this->taskTemplate);
-        $this->task->taskTemplateRuntime()->associate($this->taskTemplateRuntime);
+        DB::transaction(function () {
+            $this->task->deadline_at = $this->deadline_at;
+            $this->task->status_tx_id = $this->status->id;
+            $this->task->executable()->associate($this->executable);
+            $this->task->taskTemplate()->associate($this->taskTemplate);
+            $this->task->taskTemplateRuntime()->associate($this->taskTemplateRuntime);
 
-        $this->task->save();
+            $this->task->save();
+        });
     }
 }

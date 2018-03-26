@@ -86,6 +86,10 @@ class TaskTemplate extends Model
         return $this->morphTo();
     }
 
+    /**
+     * @param \DateTimeInterface|null $day
+     * @return mixed
+     */
     public function getActualTemplateRuntimes(\DateTimeInterface $day = null)
     {
         if (is_null($day)) {
@@ -94,6 +98,7 @@ class TaskTemplate extends Model
 
         $day = $day->format("Y-m-d");
 
+//        TODO
         $singles = DB::table('task_template_tt_runtime')
             ->select('task_template_runtime_id')
             ->join(
@@ -148,7 +153,6 @@ class TaskTemplate extends Model
 
         $runtimeIds = $query->pluck('task_template_runtime_id');
 
-
         return TaskTemplateRuntime::whereIn('id', $runtimeIds)->get();
     }
 
@@ -177,7 +181,7 @@ class TaskTemplate extends Model
                 $taskTemplateTaskRuntimes->push($taskTemplateTaskRuntime);
             }
         });
-        return $taskTemplateTaskRuntimes;
-//        return $this->taskTemplateRuntimes;
+
+        return $taskTemplateTaskRuntimes; // NOT $this->taskTemplateRuntimes
     }
 }
