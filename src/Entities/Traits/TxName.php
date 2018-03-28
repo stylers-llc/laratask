@@ -16,7 +16,7 @@ trait TxName
      */
     protected function getName()
     {
-        $txEntity = new TaxonomyEntity($this->model->name);
+        $txEntity = new TaxonomyEntity($this->model->name()->first());
         return $txEntity->getTranslationData();
     }
 }
