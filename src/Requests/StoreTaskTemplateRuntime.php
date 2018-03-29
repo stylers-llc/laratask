@@ -33,7 +33,7 @@ class StoreTaskTemplateRuntime extends FormRequest
                 new IsDateInterval(),
                 new DateDiffGreaterOrEqual(
                     Carbon::parse($this->start_at),
-                    Carbon::parse($this->end_at)
+                    $this->end_at ? Carbon::parse($this->end_at) : null
                 )
             ],
         ];

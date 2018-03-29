@@ -18,7 +18,7 @@ class DateDiffGreaterOrEqual implements Rule
      */
     private $to;
 
-    public function __construct(\DateTimeInterface $from, \DateTimeInterface $to)
+    public function __construct(\DateTimeInterface $from, \DateTimeInterface $to = null)
     {
         $this->from = $from;
         $this->to = $to;
@@ -33,7 +33,9 @@ class DateDiffGreaterOrEqual implements Rule
     public function passes($attribute, $value)
     {
         $interval = new DateInterval($value);
-        $diff = strtotime($this->to) - strtotime($this->from);
+
+        if ($this->to) $diff = strtotime($this->to) - strtotime($this->from);
+        else $diff = strtotime($this->from);
 
         return $interval->__toSeconds() <= $diff;
     }
