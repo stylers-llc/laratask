@@ -31,6 +31,6 @@ class IsDateInterval implements Rule
      */
     public function message()
     {
-        return 'The :attribute is not DateInterval.';
+        return trans('validation.is_dateinterval', ['attribute' => ':attribute']);
     }
 }

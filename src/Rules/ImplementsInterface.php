@@ -36,6 +36,6 @@ class ImplementsInterface implements Rule
      */
     public function message()
     {
-        return "The :attribute has not implements $this->interface.";
+        return trans('validation.implements_interface', ['attribute' => ':attribute', 'interface' => $this->interface]);
     }
 }

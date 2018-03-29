@@ -45,6 +45,6 @@ class DateDiffGreaterOrEqual implements Rule
      */
     public function message()
     {
-        return 'The :attribute is not greater or equal.';
+        return trans('validation.date_diff_greater_or_equal', ['attribute' => ':attribute']);
     }
 }
