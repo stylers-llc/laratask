@@ -1,5 +1,8 @@
 # Laravel Task Manager
 
+## Requirements
+* [Taxonomy](https://github.com/stylers-llc/taxonomy)
+
 ## Installation
 ```bash
 composer require stylers-llc/laratask
