@@ -18,7 +18,7 @@
   ],
   "require": {
     "php": ">=7.0",
-    "illuminate/support": "~5"
+    "illuminate/support": "~5",
     "stylers/taxonomy": "dev-master"
   },
   "require-dev": {
