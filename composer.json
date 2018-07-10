@@ -5,7 +5,8 @@
   "authors": [
     {
       "name": "Szilveszter Nagy",
-      "email": "developer@stylersonline.com"
+      "email": "developer@stylersonline.com",
+      "homepage": "http://stylers.hu"
     }
   ],
   "minimum-stability": "dev",
@@ -17,7 +18,7 @@
   ],
   "require": {
     "php": ">=7.0",
-    "laravel/framework": "5.*",
+    "illuminate/support": "~5"
     "stylers/taxonomy": "dev-master"
   },
   "require-dev": {
