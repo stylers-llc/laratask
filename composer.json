@@ -1,19 +1,20 @@
 {
-  "name": "stylers-llc/laratask",
+  "name": "stylers/laratask",
   "description": "Laravel Task Manager",
+  "homepage": "https://github.com/stylers-llc/taxonomy",
+  "keywords": [
+        "stylers",
+        "laravel",
+        "task",
+        "taxonomy"
+  ],
   "license": "MIT",
+  "minimum-stability": "dev",
   "authors": [
     {
       "name": "Szilveszter Nagy",
       "email": "developer@stylersonline.com",
       "homepage": "http://stylers.hu"
-    }
-  ],
-  "minimum-stability": "dev",
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/stylers-llc/taxonomy"
     }
   ],
   "require": {
