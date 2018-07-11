@@ -17,6 +17,12 @@
       "homepage": "http://stylers.hu"
     }
   ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/stylers-llc/taxonomy"
+    }
+  ],
   "require": {
     "php": ">=7.0",
     "illuminate/support": "~5",
