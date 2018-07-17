@@ -53,9 +53,9 @@ class TaskTemplateBuilder implements TaskTemplateBuilderInterface
     }
 
     /**
-     * @param TaskableInterface $taskable
+     * @param TaskableInterface $taskable|null
      */
-    public function setSubject(TaskableInterface $taskable)
+    public function setSubject(TaskableInterface $taskable = null)
     {
         $this->taskTemplate->taskable()->associate($taskable);
     }
