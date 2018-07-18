@@ -2,37 +2,37 @@
 
 return [
     'taxonomy' => [
-        'task_status' => 1000,
+        'task_status' => 2000,
         'task_statuses' => [
             'created' => [
-                "id" => 1001,
+                "id" => 2001,
                 "translations" => [
                     "hu" => "létrehozva",
                     "en" => "created"
                 ]
             ],
             'processing' => [
-                "id" => 1002,
+                "id" => 2002,
                 "translations" => [
                     "hu" => "feldolgozás alatt",
                     "en" => "processing"
                 ]
             ],
             'success' => [
-                "id" => 1003,
+                "id" => 2003,
                 "translations" => [
                     "hu" => "lezárva",
                     "en" => "success"
                 ]
             ],
             'error' => [
-                "id" => 1004,
+                "id" => 2004,
                 "translations" => [
                     "hu" => "hibás",
                     "en" => "error"
                 ]
             ],
         ],
-        'task_template_names' => 1100,
+        'task_template_names' => 2500,
     ]
 ];
